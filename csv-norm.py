@@ -93,7 +93,7 @@ counter = 0
 for bar in bars: 
   float_bar = to_float(bar)
   output_bar.append(float_bar)
-  output_total[counter] = output_total[counter] + float_bar
+  output_total[counter] = output_total[counter] + float_bar 
   counter += 1
 
 output_data["FooDuration"] = output_foo
@@ -104,7 +104,7 @@ output_data["Notes"] = sample_data["Notes"]
 
 #convert dict to dataframe
 output_dataframe=pandas.DataFrame.from_dict(output_data)
-#print("output df", output_dataframe)
+
 #export to file
 output_dataframe.to_csv('output.csv', encoding='utf-8')
 
