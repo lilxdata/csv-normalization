@@ -7,7 +7,10 @@ from pytz import timezone
 file_to_normalize = sys.argv[1]
 
 #read file 
-sample_data = pandas.read_csv(file_to_normalize)
+try: 
+  sample_data = pandas.read_csv(file_to_normalize, encoding = 'utf-8')
+except: 
+  sample_data = pandas.read_csv(file_to_normalize, encoding = 'ISO-8859-1')    
 
 #helper function to convert timestamps to eastern time
 date_format = "%m/%d/%y %I:%M:%S %p"
@@ -17,6 +20,7 @@ def pst_to_est(time):
   est_time = convert_to_est.strftime(date_format)
   return est_time
 
+#timestamps should be in iso-8601
 #initialize empty list of timestamps 
 output_timestamps = []
 
@@ -102,6 +106,6 @@ output_data["Notes"] = sample_data["Notes"]
 output_dataframe=pandas.DataFrame.from_dict(output_data)
 #print("output df", output_dataframe)
 #export to file
-output_dataframe.to_csv('foobar.csv', encoding='utf-8')
+output_dataframe.to_csv('output.csv', encoding='utf-8')
 
 
